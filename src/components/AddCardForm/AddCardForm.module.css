@@ -1,0 +1,37 @@
+.addCardForm {
+  --gap-standard: 1rem;
+  --gap-sm: 0.25rem;
+  --border-radius: 0.25rem;
+
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  text-align: start;
+  gap: var(--gap-standard);
+
+  input,
+  select {
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--border-radius);
+    border-width: 0.5px;
+  }
+
+  .formField {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formFieldGroup {
+    display: flex;
+    gap: var(--gap-standard);
+
+    input {
+      max-width: 4rem;
+    }
+  }
+
+  .formDateInput {
+    display: flex;
+    gap: var(--gap-sm);
+  }
+}
