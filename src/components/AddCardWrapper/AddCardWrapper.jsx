@@ -4,14 +4,18 @@ import AddCardForm from "../AddCardForm/AddCardForm";
 import validateInputs from "../../helpers/inputHelper";
 
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCard } from "../../redux/cardSlice";
 
 function AddCardWrapper() {
-  const [provider, setProvider] = useState("Visa");
-  const [cardNumber, setCardNumber] = useState("1234567891011121");
-  const [cardHolder, setCardHolder] = useState("John Smith");
-  const [expiresMonth, setExpiresMonth] = useState("01");
-  const [expiresYear, setExpiresYear] = useState("25");
-  const [ccv, setCCV] = useState(123);
+  let dispatch = useDispatch();
+
+  const [provider, setProvider] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardHolder, setCardHolder] = useState("");
+  const [expiresMonth, setExpiresMonth] = useState("");
+  const [expiresYear, setExpiresYear] = useState("");
+  const [ccv, setCCV] = useState("");
 
   const [error, setError] = useState("");
 
@@ -38,6 +42,8 @@ function AddCardWrapper() {
   }
 
   function handleSave() {
+    setError("");
+
     let inputs = {
       provider,
       cardNumber,
@@ -47,8 +53,11 @@ function AddCardWrapper() {
       ccv,
     };
     let validation = validateInputs(inputs);
-
     console.log(validation);
+
+    validation.hasErrors
+      ? setError(validation.errors)
+      : dispatch(addCard(inputs));
   }
 
   return (

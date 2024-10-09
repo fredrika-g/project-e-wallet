@@ -3,29 +3,29 @@ function validateInputs(inputs) {
   let errors = {};
   let hasErrors = false;
 
-  // Validate provider (should be a non-empty string)
+  // Provider (non-empty string)
   if (typeof inputs.provider !== "string" || inputs.provider.trim() === "") {
-    errors.provider = "Provider must be a non-empty string.";
+    errors.provider = "Please choose a provider in the list";
   }
 
-  // Validate card number (should be a string of 16 digits)
+  // Card Number (16 numerical digits)
   if (
     typeof inputs.cardNumber !== "string" ||
     !/^\d{16}$/.test(inputs.cardNumber)
   ) {
-    errors.cardNumber = "Card number must be a string consisting of 16 digits.";
+    errors.cardNumber = "Card number must consist of 16 numerical digits";
   }
 
-  // Validate card holder (should not contain numeric values)
+  // Card Holder (valid name format)
   if (!/^[a-zA-Z\s]+$/.test(inputs.cardHolder)) {
     errors.cardHolder =
-      "Card holder name must only contain alphabetic characters and spaces.";
+      "Card holder name must consist of alphabetic characters and spaces";
   }
 
-  // Validate expiration date (month: MM, year: YY, must not be expired)
+  // Expiration Date (check not expired)
   const currentDate = new Date();
-  const currentYear = currentDate.getFullYear() % 100; // Get last two digits of the year
-  const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based, so add 1
+  const currentYear = currentDate.getFullYear() % 100; // extract last two digits of year
+  const currentMonth = currentDate.getMonth() + 1;
 
   const expires = { month: inputs.expiresMonth, year: inputs.expiresYear };
 
@@ -35,8 +35,8 @@ function validateInputs(inputs) {
     expires.month < 1 ||
     expires.month > 12
   ) {
-    errors.expires.month =
-      "Expiration month must be a valid two-digit string (MM).";
+    errors.expires = {};
+    errors.expires.month = "Expiration month must follow format: MM";
   }
 
   if (
@@ -45,26 +45,16 @@ function validateInputs(inputs) {
     expires.year < currentYear ||
     (expires.year == currentYear && expires.month < currentMonth)
   ) {
-    errors.expires.year = "Card has expired or the expiration year is invalid.";
+    errors.expires = {};
+    errors.expires.year = "Card has expired or the expiration year is invalid";
   }
 
-  // Validate CCV (should be a 3-digit number string)
+  // ccv
   if (typeof inputs.ccv !== "string" || !/^\d{3}$/.test(inputs.ccv)) {
-    errors.ccv = "CCV must be a string consisting of 3 digits.";
+    errors.ccv = "CCV must consist of 3 numerical digits";
   }
 
-  // Example usage
-  //   const paymentInput = {
-  //     provider: "Visa",
-  //     cardNumber: "1234567812345678",
-  //     cardHolder: "John Doe",
-  //     expires: { month: "12", year: "25" },
-  //     CCV: "123",
-  //   };
-
-  //   const result = validatePaymentInput(paymentInput);
-
-  return { hasErrors, errors };
+  return { hasErrors: Object.keys(errors).length > 0, errors };
 }
 
 export default validateInputs;

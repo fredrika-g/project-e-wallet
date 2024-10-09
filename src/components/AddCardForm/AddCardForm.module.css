@@ -8,6 +8,7 @@
   align-content: start;
   text-align: start;
   gap: var(--gap-standard);
+  max-width: 25rem;
 
   input,
   select {
@@ -33,5 +34,10 @@
   .formDateInput {
     display: flex;
     gap: var(--gap-sm);
+  }
+
+  .error {
+    font-size: 0.8rem;
+    font-style: italic;
   }
 }
