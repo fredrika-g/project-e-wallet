@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Pages
 import HomePage from "./pages/HomePage.jsx";
 import AddCardPage from "./pages/AddCardPage.jsx";
+import CardInfoPage from "./pages/CardInfoPage.jsx";
 
 // Redux Toolkit
 import { Provider } from "react-redux";
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/addcard" element={<AddCardPage />} />
+          <Route path="/card/:id" element={<CardInfoPage />} />
         </Routes>
 
         <App />

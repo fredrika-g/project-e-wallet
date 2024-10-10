@@ -1,9 +1,7 @@
+import CardsWrapper from "../components/CardsWrapper/CardsWrapper";
+
 function HomePage() {
-  return (
-    <>
-      <h1>Startsida</h1>
-    </>
-  );
+  return <CardsWrapper />;
 }
 
 export default HomePage;

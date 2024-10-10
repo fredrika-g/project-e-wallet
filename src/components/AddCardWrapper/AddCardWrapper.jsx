@@ -2,9 +2,10 @@ import CardPreview from "../CardPreview/CardPreview";
 import AddCardForm from "../AddCardForm/AddCardForm";
 
 import validateInputs from "../../helpers/inputHelper";
+import setUniqueID from "../../helpers/setUniqueID";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
 
 // react router
@@ -12,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 function AddCardWrapper() {
   let dispatch = useDispatch();
+
+  let cards = useSelector((store) => store.cards.cards);
 
   let navigate = useNavigate();
 
@@ -50,13 +53,18 @@ function AddCardWrapper() {
   function handleSave() {
     setError("");
 
+    // setting unique id
+    let id = setUniqueID(cards);
+
     let inputs = {
+      id,
       provider,
       cardNumber,
       cardHolder,
       expiresMonth,
       expiresYear,
       ccv,
+      active: false,
     };
     let validation = validateInputs(inputs);
     console.log(validation);

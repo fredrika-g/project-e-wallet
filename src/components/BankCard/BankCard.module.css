@@ -1,0 +1,41 @@
+.bankCard {
+  .creditCard {
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .cardProvider {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .cardNumber {
+    font-size: 24px;
+    letter-spacing: 3px;
+    margin: 20px 0;
+  }
+
+  .cardHolder {
+    font-size: 16px;
+  }
+
+  .cardExpiry {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+
+  .cardExpiry span {
+    display: inline-block;
+  }
+}
