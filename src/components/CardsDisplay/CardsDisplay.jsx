@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 
+import { Link } from "react-router-dom";
+
 import BankCard from "../BankCard/BankCard";
 
 function CardsDisplay() {
@@ -17,7 +19,12 @@ function CardsDisplay() {
         <h2>Inactive Cards</h2>
         {cards &&
           cards.map((card) => {
-            if (!card.active) return <BankCard {...card} key={card.id} />;
+            if (!card.active)
+              return (
+                <Link key={card.id} to={"/card/" + card.id} state={card}>
+                  <BankCard {...card} />
+                </Link>
+              );
           })}
       </section>
     </>

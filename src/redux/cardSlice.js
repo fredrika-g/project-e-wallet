@@ -30,10 +30,21 @@ const cardSlice = createSlice({
     addCard: (state, action) => {
       state.cards.push(action.payload);
     },
+    deleteCard: (state, action) => {
+      let cardIndex = state.cards.indexOf((card) => card.id === action.payload);
+      state.cards.splice(cardIndex, 1);
+    },
+    activateCard: (state, action) => {
+      let currentActive = state.cards.find((card) => card.active);
+      currentActive.active = false;
+
+      let newActive = state.cards.find((card) => card.id === action.payload);
+      newActive.active = true;
+    },
   },
 });
 
-export const { addCard } = cardSlice.actions;
+export const { addCard, deleteCard, activateCard } = cardSlice.actions;
 
 export default cardSlice.reducer;
 
