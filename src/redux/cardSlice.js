@@ -8,21 +8,23 @@ const cardSlice = createSlice({
         provider: "Visa",
         cardNumber: "1234567890123456",
         cardHolder: "Anna Svensson",
-        expires: { month: "12", year: "26" },
-        CCV: 123,
+        expiresMonth: "12",
+        expiresYear: "26",
+        ccv: 123,
       },
       {
         provider: "MasterCard",
         cardNumber: "9876543210987654",
         cardHolder: "Anna Svensson",
-        expires: { month: "06", year: "25" },
-        CCV: 456,
+        expiresMonth: "06",
+        expiresYear: "25",
+        ccv: 456,
       },
     ],
   },
   reducers: {
     addCard: (state, action) => {
-      console.log(action.payload);
+      state.cards.push(action.payload);
     },
   },
 });

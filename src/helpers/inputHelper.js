@@ -1,7 +1,5 @@
 function validateInputs(inputs) {
-  console.log(inputs);
   let errors = {};
-  let hasErrors = false;
 
   // Provider (non-empty string)
   if (typeof inputs.provider !== "string" || inputs.provider.trim() === "") {

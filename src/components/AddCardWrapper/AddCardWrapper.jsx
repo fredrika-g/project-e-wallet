@@ -7,9 +7,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
 
+// react router
+import { useNavigate } from "react-router-dom";
+
 function AddCardWrapper() {
   let dispatch = useDispatch();
 
+  let navigate = useNavigate();
+
+  // local states
   const [provider, setProvider] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardHolder, setCardHolder] = useState("");
@@ -55,9 +61,13 @@ function AddCardWrapper() {
     let validation = validateInputs(inputs);
     console.log(validation);
 
-    validation.hasErrors
-      ? setError(validation.errors)
-      : dispatch(addCard(inputs));
+    if (validation.hasErrors) {
+      setError(validation.errors);
+    } else {
+      dispatch(addCard(inputs));
+      // redirecting to startpage on success
+      navigate("/");
+    }
   }
 
   return (
