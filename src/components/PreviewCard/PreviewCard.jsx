@@ -1,4 +1,7 @@
 import styles from "./PreviewCard.module.css";
+import Visa from "../CardLogos/Visa";
+import MasterCard from "../CardLogos/Mastercard";
+import AmericanExpress from "../CardLogos/AmericanExpress";
 
 function PreviewCard({
   provider,
@@ -12,7 +15,10 @@ function PreviewCard({
       <div className={styles.bankCard}>
         <div className={styles.creditCard}>
           <div className={styles.cardProvider}>
-            {provider ? provider : "Provider"}
+            {!provider && "Provider"}
+            {provider === "Visa" && <Visa />}
+            {provider === "MasterCard" && <MasterCard />}
+            {provider === "American Express" && <AmericanExpress />}
           </div>
           <div className={styles.cardNumber}>
             {cardNumber ? cardNumber : "0123456789101112"}

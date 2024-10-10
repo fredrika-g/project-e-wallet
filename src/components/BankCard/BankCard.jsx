@@ -1,8 +1,9 @@
 import styles from "./BankCard.module.css";
+import Visa from "../CardLogos/Visa";
+import MasterCard from "../CardLogos/Mastercard";
+import AmericanExpress from "../CardLogos/AmericanExpress";
 
 function BankCard({
-  active,
-  id,
   provider,
   cardNumber,
   cardHolder,
@@ -14,7 +15,9 @@ function BankCard({
       <div className={styles.bankCard}>
         <div className={styles.creditCard}>
           <div className={styles.cardProvider}>
-            {provider ? provider : "Provider"}
+            {provider === "Visa" && <Visa />}
+            {provider === "MasterCard" && <MasterCard />}
+            {provider === "American Express" && <AmericanExpress />}
           </div>
           <div className={styles.cardNumber}>
             {cardNumber ? cardNumber : "0123456789101112"}

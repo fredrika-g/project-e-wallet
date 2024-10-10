@@ -1,7 +1,9 @@
 const cardProviders = [
-  { name: "Visa", logo: "" },
-  { name: "MasterCard", logo: "" },
-  { name: "American Express", logo: "" },
+  {
+    name: "Visa",
+  },
+  { name: "MasterCard" },
+  { name: "American Express" },
 ];
 
 export default cardProviders;

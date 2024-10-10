@@ -10,6 +10,8 @@
   gap: var(--gap-standard);
   max-width: 25rem;
 
+  margin-top: 2rem;
+
   input,
   select {
     padding: 0.3rem 0.5rem;
