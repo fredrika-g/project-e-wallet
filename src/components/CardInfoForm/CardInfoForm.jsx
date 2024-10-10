@@ -1,18 +1,51 @@
-import styles from "./AddCardForm.module.css";
+import styles from "./CardInfoForm.module.css";
 
 import cardProviders from "../../data/cardProviders";
 
-function AddCardForm({ editFields, handleSave, error }) {
+import { useState } from "react";
+
+function CardInfoForm({ handleAction, editFields, card, error }) {
+  //   local states to handle form inputs
+  const [cardNumber, setCardNumber] = useState(card.cardNumber);
+  const [cardHolder, setCardHolder] = useState(card.cardHolder);
+  const [expiresMonth, setExpiresMonth] = useState(card.expiresMonth);
+  const [expiresYear, setExpiresYear] = useState(card.expiresYear);
+  const [ccv, setCCV] = useState(card.ccv.toString());
+  const [provider, setProvider] = useState(card.provider);
+
+  //   setting states on input change
+  function editFields(state, value) {
+    switch (state) {
+      case "provider":
+        setProvider(value);
+        break;
+      case "cardNumber":
+        setCardNumber(value);
+        break;
+      case "cardHolder":
+        setCardHolder(value);
+        break;
+      case "expiresMonth":
+        setExpiresMonth(value);
+        break;
+      case "expiresYear":
+        setExpiresYear(value);
+        break;
+      case "ccv":
+        setCCV(value);
+    }
+  }
+
   return (
     <>
-      <form className={styles.addCardForm}>
+      <form className={styles.cardInfoForm}>
         <div className={styles.formField}>
           <label htmlFor="cardHolder">Card Holder:</label>
           <input
             type="text"
             id="cardHolder"
             required
-            placeholder="John Smith"
+            value={cardHolder}
             onChange={(e) => {
               editFields("cardHolder", e.target.value);
             }}
@@ -28,7 +61,7 @@ function AddCardForm({ editFields, handleSave, error }) {
             type="text"
             id="cardNumber"
             maxLength="16"
-            placeholder="0123456789101112 (16)"
+            value={cardNumber}
             required
             onChange={(e) => {
               editFields("cardNumber", e.target.value);
@@ -46,9 +79,9 @@ function AddCardForm({ editFields, handleSave, error }) {
               <select
                 name="expires"
                 id="expiresMonth"
-                defaultValue="MM"
+                defaultValue={expiresMonth}
                 onChange={(e) => {
-                  editFields("expiresMonth", e.target.value);
+                  setExpiresMonth(e.target.value);
                 }}
               >
                 <option value="MM" disabled>
@@ -71,9 +104,9 @@ function AddCardForm({ editFields, handleSave, error }) {
                 type="text"
                 name="expires"
                 id="expiresYear"
-                placeholder="YY"
+                value={expiresYear}
                 onChange={(e) => {
-                  editFields("expiresYear", e.target.value);
+                  setExpiresYear(e.target.value);
                 }}
               />
             </div>
@@ -90,10 +123,10 @@ function AddCardForm({ editFields, handleSave, error }) {
               type="text"
               id="ccv"
               maxLength="3"
-              placeholder="123"
+              value={ccv}
               required
               onChange={(e) => {
-                editFields("ccv", e.target.value);
+                setCCV(e.target.value);
               }}
             />
             {error?.ccv && <span className={styles.error}>{error.ccv}</span>}
@@ -104,9 +137,9 @@ function AddCardForm({ editFields, handleSave, error }) {
           <label htmlFor="provider">Provider:</label>
           <select
             id="provider"
-            defaultValue="Provider"
+            defaultValue={provider}
             onChange={(e) => {
-              editFields("provider", e.target.value);
+              setProvider(e.target.value);
             }}
           >
             <option value="Provider" disabled>
@@ -122,12 +155,24 @@ function AddCardForm({ editFields, handleSave, error }) {
           )}
         </div>
 
-        <button type="button" onClick={handleSave}>
-          Save
+        <button
+          onClick={() =>
+            handleAction("save", {
+              provider,
+              cardHolder,
+              cardNumber,
+              expiresMonth,
+              expiresYear,
+              ccv,
+            })
+          }
+          type="button"
+        >
+          Save Changes
         </button>
       </form>
     </>
   );
 }
 
-export default AddCardForm;
+export default CardInfoForm;

@@ -1,19 +1,28 @@
 import PreviewCard from "../PreviewCard/PreviewCard";
 import CardActionButtons from "../CardActionButtons/CardActionButtons";
+import CardInfoForm from "../CardInfoForm/CardInfoForm";
 
-import { deleteCard, activateCard } from "../../redux/cardSlice";
+import validateInputs from "../../helpers/inputHelper";
+
+import { deleteCard, activateCard, updateCard } from "../../redux/cardSlice";
 
 import { useDispatch } from "react-redux";
 
 // react router
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function CardInfoWrapper({ card }) {
   let dispatch = useDispatch();
 
   let navigate = useNavigate();
 
-  function handleAction(action) {
+  //   local state to show error messages
+  const [error, setError] = useState("");
+
+  // helper functions
+
+  function handleAction(action, inputs) {
     if (action === "delete") {
       dispatch(deleteCard(card.id));
       navigate("/");
@@ -25,12 +34,29 @@ function CardInfoWrapper({ card }) {
     }
 
     if (action === "save") {
+      handleSave(inputs);
     }
   }
+
+  function handleSave(inputs) {
+    // checking for validation of inputs
+    let validation = validateInputs(inputs);
+
+    if (validation.hasErrors) {
+      setError(validation.errors);
+    } else {
+      // if validatio successfull, update state
+      dispatch(updateCard({ id: card.id, ...inputs }));
+      //   redirect after completion
+      navigate("/");
+    }
+  }
+
   return (
     <>
       <CardActionButtons handleAction={handleAction} />
       <PreviewCard {...card} />
+      <CardInfoForm handleAction={handleAction} card={card} error={error} />
     </>
   );
 }

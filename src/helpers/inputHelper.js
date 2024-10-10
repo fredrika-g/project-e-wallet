@@ -1,4 +1,5 @@
 function validateInputs(inputs) {
+  console.log(inputs);
   let errors = {};
 
   // Provider (non-empty string)

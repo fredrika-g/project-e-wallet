@@ -41,14 +41,29 @@ const cardSlice = createSlice({
       let newActive = state.cards.find((card) => card.id === action.payload);
       newActive.active = true;
     },
+    updateCard: (state, action) => {
+      let { cardHolder, cardNumber, provider, expiresMonth, expiresYear, ccv } =
+        action.payload;
+
+      let card = state.cards.find((c) => c.id === action.payload.id);
+      card.cardHolder = cardHolder;
+      card.cardNumber = cardNumber;
+      card.provider = provider;
+      card.expiresMonth = expiresMonth;
+      card.expiresYear = expiresYear;
+      card.ccv = ccv;
+
+      console.log("updateCard", card);
+    },
   },
 });
 
-export const { addCard, deleteCard, activateCard } = cardSlice.actions;
+export const { addCard, deleteCard, activateCard, updateCard } =
+  cardSlice.actions;
 
 export default cardSlice.reducer;
 
-// card object schema
+// card object model
 // card = {
 //     provider: "string",
 //     cardNumber: Number (16),
