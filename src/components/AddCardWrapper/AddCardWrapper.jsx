@@ -1,3 +1,5 @@
+import styles from "./AddCardWrapper.module.css";
+
 import CardPreview from "../CardPreview/CardPreview";
 import AddCardForm from "../AddCardForm/AddCardForm";
 
@@ -10,6 +12,7 @@ import { addCard } from "../../redux/cardSlice";
 
 // react router
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function AddCardWrapper() {
   let dispatch = useDispatch();
@@ -28,6 +31,7 @@ function AddCardWrapper() {
 
   const [error, setError] = useState("");
 
+  // help set local states
   function editFields(state, value) {
     switch (state) {
       case "provider":
@@ -50,6 +54,7 @@ function AddCardWrapper() {
     }
   }
 
+  // handle click on save btn
   function handleSave() {
     setError("");
 
@@ -79,8 +84,13 @@ function AddCardWrapper() {
   }
 
   return (
-    <main>
-      <h2>Nytt kort</h2>
+    <main className={styles.wrapper}>
+      <Link to="/">
+        <button>
+          <i className="fa-solid fa-house"></i> Go Back
+        </button>
+      </Link>
+      <h2>New Card</h2>
       <CardPreview
         editFields={editFields}
         provider={provider}

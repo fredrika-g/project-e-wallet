@@ -45,8 +45,8 @@ function CardInfoWrapper({ card }) {
     if (validation.hasErrors) {
       setError(validation.errors);
     } else {
-      // if validatio successfull, update state
-      dispatch(updateCard({ id: card.id, ...inputs }));
+      // if validation successful, update state
+      dispatch(updateCard({ id: card.id, ...inputs, active: false }));
       //   redirect after completion
       navigate("/");
     }

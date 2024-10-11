@@ -11,7 +11,7 @@ const cardSlice = createSlice({
         cardHolder: "Anna Svensson",
         expiresMonth: "12",
         expiresYear: "26",
-        ccv: 123,
+        ccv: "123",
         active: true,
       },
       {
@@ -21,7 +21,7 @@ const cardSlice = createSlice({
         cardHolder: "Anna Svensson",
         expiresMonth: "06",
         expiresYear: "25",
-        ccv: 456,
+        ccv: "456",
         active: false,
       },
     ],
@@ -31,34 +31,53 @@ const cardSlice = createSlice({
       state.cards.push(action.payload);
     },
     deleteCard: (state, action) => {
-      let cardIndex = state.cards.indexOf((card) => card.id === action.payload);
-      state.cards.splice(cardIndex, 1);
+      let cardIndex = state.cards.findIndex(
+        (card) => card.id === action.payload
+      );
+      if (cardIndex !== -1) {
+        state.cards.splice(cardIndex, 1);
+      } else {
+        console.log("Card not found");
+      }
     },
     activateCard: (state, action) => {
       let currentActive = state.cards.find((card) => card.active);
-      currentActive.active = false;
+      if (currentActive) {
+        currentActive.active = false;
+      } else {
+        console.log("No currently active card found");
+      }
 
       let newActive = state.cards.find((card) => card.id === action.payload);
-      newActive.active = true;
+      if (newActive) {
+        newActive.active = true;
+      } else {
+        console.log("Card not found");
+      }
     },
     updateCard: (state, action) => {
       let { cardHolder, cardNumber, provider, expiresMonth, expiresYear, ccv } =
         action.payload;
 
       let card = state.cards.find((c) => c.id === action.payload.id);
-      card.cardHolder = cardHolder;
-      card.cardNumber = cardNumber;
-      card.provider = provider;
-      card.expiresMonth = expiresMonth;
-      card.expiresYear = expiresYear;
-      card.ccv = ccv;
-
-      console.log("updateCard", card);
+      if (card) {
+        card.cardHolder = cardHolder;
+        card.cardNumber = cardNumber;
+        card.provider = provider;
+        card.expiresMonth = expiresMonth;
+        card.expiresYear = expiresYear;
+        card.ccv = ccv;
+      } else {
+        console.log("Card not found");
+      }
+    },
+    deleteInactive: (state) => {
+      console.log("Deleting inactive");
     },
   },
 });
 
-export const { addCard, deleteCard, activateCard, updateCard } =
+export const { addCard, deleteCard, activateCard, updateCard, deleteInactive } =
   cardSlice.actions;
 
 export default cardSlice.reducer;
@@ -66,8 +85,10 @@ export default cardSlice.reducer;
 // card object model
 // card = {
 //     provider: "string",
-//     cardNumber: Number (16),
+//     cardNumber: "numerical string" (16),
 //     cardHolder: "string" (no numeric values) ,
-//     expires: {month: MM, year: YY} (not passed),
-//     CCV: number (max 3)
+//     expiresMonth: "MM",
+//     expiresYear: "YY",
+//     ccv: "numerical string" (max 3)
+//     active: boolean
 //};
