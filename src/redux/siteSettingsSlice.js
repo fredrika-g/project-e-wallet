@@ -4,7 +4,7 @@ const siteSettingsSlice = createSlice({
   name: "settings",
   initialState: {
     theme: "light",
-    themeOptions: ["light", "dark", "pastel"],
+    themeOptions: ["light", "dark", "pink"],
   },
   reducers: {
     changeTheme: (state, action) => {

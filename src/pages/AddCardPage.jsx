@@ -1,7 +1,16 @@
 import AddCardWrapper from "../components/AddCardWrapper/AddCardWrapper";
 
+// redux toolkit
+
+import { useSelector } from "react-redux";
+
 function AddCardPage() {
-  return <AddCardWrapper />;
+  let theme = useSelector((store) => store.settings.theme);
+  return (
+    <div className={theme}>
+      <AddCardWrapper />
+    </div>
+  );
 }
 
 export default AddCardPage;
