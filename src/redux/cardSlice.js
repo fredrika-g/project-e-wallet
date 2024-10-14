@@ -72,7 +72,8 @@ const cardSlice = createSlice({
       }
     },
     deleteInactive: (state) => {
-      console.log("Deleting inactive");
+      let updatedCards = state.cards.filter((card) => card.active);
+      state.cards = updatedCards;
     },
   },
 });

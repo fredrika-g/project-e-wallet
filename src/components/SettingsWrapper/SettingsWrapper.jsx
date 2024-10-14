@@ -53,7 +53,9 @@ function SettingsWrapper() {
           handleSave={handleSave}
         />
         <div>
-          <button onClick={handleDelete}>Delete All Inactive Cards</button>
+          <button className={styles.danger} onClick={handleDelete}>
+            Delete All Inactive Cards
+          </button>
           {msg && <p>{msg}</p>}
         </div>
         <Link to="/">

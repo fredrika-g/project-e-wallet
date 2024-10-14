@@ -1,4 +1,6 @@
 .bankCard {
+  margin-block: 0.75rem;
+
   .creditCard {
     width: 350px;
     height: 200px;

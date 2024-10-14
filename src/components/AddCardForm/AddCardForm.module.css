@@ -10,13 +10,6 @@
   gap: var(--gap-standard);
   max-width: 25rem;
 
-  input,
-  select {
-    padding: 0.3rem 0.5rem;
-    border-radius: var(--border-radius);
-    border-width: 0.5px;
-  }
-
   .formField {
     display: flex;
     flex-direction: column;

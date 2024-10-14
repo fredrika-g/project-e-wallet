@@ -12,7 +12,6 @@ import { addCard } from "../../redux/cardSlice";
 
 // react router
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function AddCardWrapper() {
   let dispatch = useDispatch();
@@ -72,7 +71,6 @@ function AddCardWrapper() {
       active: false,
     };
     let validation = validateInputs(inputs);
-    console.log(validation);
 
     if (validation.hasErrors) {
       setError(validation.errors);
@@ -85,11 +83,6 @@ function AddCardWrapper() {
 
   return (
     <main className={styles.wrapper}>
-      <Link to="/">
-        <button>
-          <i className="fa-solid fa-house"></i> Go Back
-        </button>
-      </Link>
       <h2>New Card</h2>
       <CardPreview
         editFields={editFields}

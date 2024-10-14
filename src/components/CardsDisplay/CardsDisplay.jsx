@@ -11,8 +11,6 @@ function CardsDisplay() {
   //   getting the active card
   const activeCard = cards.find((card) => card.active);
 
-  console.log("Cards:", cards);
-
   return (
     <>
       <section>

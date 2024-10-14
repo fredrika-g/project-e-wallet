@@ -1,4 +1,5 @@
 // components
+import Header from "../components/Header/Header";
 import SettingsWrapper from "../components/SettingsWrapper/SettingsWrapper";
 
 // redux toolkit
@@ -8,6 +9,7 @@ function SettingsPage() {
   let theme = useSelector((store) => store.settings.theme);
   return (
     <div className={theme}>
+      <Header />
       <SettingsWrapper />
     </div>
   );

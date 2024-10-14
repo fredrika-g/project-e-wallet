@@ -3,6 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 // redux toolkit
 import { useSelector } from "react-redux";
 
+// components
+import Header from "../components/Header/Header";
 import CardInfoWrapper from "../components/CardInfoWrapper/CardInfoWrapper";
 
 function CardInfoPage() {
@@ -23,7 +25,10 @@ function CardInfoPage() {
 
   return (
     <>
-      <div className={theme}>{card && <CardInfoWrapper card={card} />}</div>
+      <div className={theme}>
+        <Header />
+        {card && <CardInfoWrapper card={card} />}
+      </div>
     </>
   );
 }

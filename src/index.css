@@ -1,12 +1,12 @@
 :root {
   --bg-color-light: hsl(0, 0%, 100%);
-  --text-color-light: hsl(0, 0%, 0%);
+  --text-color-light: hsl(0, 0%, 20%);
 
   --bg-color-dark: hsl(0, 0%, 15%);
   --text-color-dark: hsl(0, 0%, 90%);
 
-  --bg-color-pink: hsl(309, 53%, 74%);
-  --text-color-pink: hsl(305, 69%, 29%);
+  --bg-color-pink: #ffccf2;
+  --text-color-pink: #a9105d;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,15 +16,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -43,15 +34,13 @@ button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.05em;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s ease-out;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -63,19 +52,80 @@ button:focus-visible {
   place-items: center;
   min-width: 100vw;
   min-height: 100vh;
+
+  padding-block: 1rem;
 }
 
 .light {
   color: var(--text-color-light);
   background-color: var(--bg-color-light);
+
+  button {
+    background-color: hsl(0, 0%, 94%);
+    color: hsl(0, 0%, 20%);
+    border-color: hsl(0, 0%, 80%);
+  }
+
+  button:hover {
+    background-color: hsl(0, 0%, 88%);
+    border-color: hsl(0, 0%, 73%);
+  }
 }
 
 .dark {
   color: var(--text-color-dark);
   background-color: var(--bg-color-dark);
+
+  button {
+    background-color: #333;
+    color: #f5f5f5;
+    border-color: #555;
+  }
+
+  button:hover {
+    background-color: #444;
+    border-color: #666;
+  }
 }
 
 .pink {
   color: var(--text-color-pink);
   background-color: var(--bg-color-pink);
+
+  button {
+    color: var(--text-color-pink);
+    background-color: #fff;
+    border: 0.5px solid var(--text-color-pink);
+  }
+
+  button:hover {
+    color: var(--bg-color-pink);
+    background-color: var(--text-color-pink);
+  }
+}
+
+header {
+  .siteHeading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .headerNav {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+input,
+select {
+  font-size: 1.1rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.25rem;
+  border-width: 0.5px;
 }
